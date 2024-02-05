@@ -1,0 +1,49 @@
+﻿@model List<FileData>
+@{
+    ViewData["Title"] = "Show All Blobs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Show All Blobs</h1>
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>  @TempData["SuccessMessage"]</strong>
+    </div>
+}
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>File Name</th>
+                    <th>File Size(Bytes)</th>
+                    <th>Modified On</th>
+                    <th class="text-center">Picture</th>
+                    <th class="text-center">View</th>
+                    <th class="text-center">Download</th>
+                    <th class="text-center">Update</th>
+                    <th class="text-center">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.FileName</td>
+                        <td>@item.FileSize</td>
+                        <td>@item.ModifiedOn</td>
+                        <td><img src="@item.ImageFullPath" width="200" height="100" title="Latest Uploaded" /></td>
+                        <td> <a href="/Demo2/ShowSingleBlob?blobName=@item.FileName" class="btn btn-sm btn-outline-info text-center">View</a> </td>
+                        <td> <a href="/Demo2/Download?blobName=@item.FileName" class="btn btn-sm btn-outline-info text-center">Download</a> </td>
+                        <td> <a href="/Demo2/Update?blobName=@item.FileName" class="btn btn-sm btn-outline-info text-center">Update</a> </td>
+                        <td> <a href="/Demo2/Delete?blobName=@item.FileName" class="btn btn-sm btn-outline-danger text-center">Delete</a> </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+

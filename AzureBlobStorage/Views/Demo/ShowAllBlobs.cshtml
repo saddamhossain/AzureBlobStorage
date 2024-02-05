@@ -1,0 +1,37 @@
+﻿@model List<FileData>
+@{
+    ViewData["Title"] = "ShowAllBlobs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Show All Blobs</h1>
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>  @TempData["SuccessMessage"]</strong>
+    </div>
+}
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>File Name</th>
+            <th>File Size</th>
+            <th>Modified On</th>
+            <th>Download</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.FileName</td>
+                <td>@item.FileSize</td>
+                <td>@item.ModifiedOn</td>
+                <td> <a href="/Demo/Download?blobName=@item.FileName">Download</a> </td>
+                <td> <a href="/Demo/Delete?blobName=@item.FileName">Delete</a> </td>
+            </tr>
+        }
+    </tbody>
+</table>
